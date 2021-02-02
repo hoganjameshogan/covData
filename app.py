@@ -44,12 +44,17 @@ def conv(arr):
 tidyDict = conv(tidyArr)
 # print(tidyDict)
 
+for key in tidyDict.items():
+   print(key)
+print('______________________________________________________________\n')
+
 def colorFn(x):
-    print("%s ---> %s" % (name, tidyDict[name]))
+    
     color = 'white'
     name = x['properties']['NAME']
+    
     if name not in tidyDict:
-        print('nope')
+        print('%s nope' % (name))
     else :
         if tidyDict[name] >= 1000:
             color = 'red'
@@ -74,4 +79,4 @@ style_function= lambda x : {'fillColor':colorFn(x), 'stroke':'black'}))
 worldMap.add_child(fg)
 worldMap.save("test.html")
 
-# webbrowser.open("test.html")
+webbrowser.open("test.html")
