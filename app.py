@@ -49,15 +49,17 @@ for key in tidyDict.items():
 print('______________________________________________________________\n')
 
 def colorFn(x):
-    
     color = 'white'
     name = x['properties']['NAME']
     
     if name not in tidyDict:
+        
         print('%s nope' % (name))
     else :
-        if tidyDict[name] >= 1000:
-            color = 'red'
+        if tidyDict[name] >= 10000:
+            color = '#800000'
+        elif tidyDict[name] >= 1000:
+            color = '#d47f7f'
         elif tidyDict[name] >= 500 and tidyDict[name] < 1000:
             color = 'orange'
         elif tidyDict[name] >= 100 and tidyDict[name] < 500:
@@ -66,7 +68,6 @@ def colorFn(x):
             color = '#a0beef'
         else :
             color = 'green'    
-        # print("%s : %s" % (name, tidyDict[name]))
     return color
 
 
@@ -77,6 +78,6 @@ fg.add_child(folium.GeoJson(data=open("world.json", "r",encoding="utf-8-sig").re
 style_function= lambda x : {'fillColor':colorFn(x), 'stroke':'black'}))
 
 worldMap.add_child(fg)
-worldMap.save("test.html")
+worldMap.save("cov_map.html")
 
-webbrowser.open("test.html")
+webbrowser.open("cov_map.html")
