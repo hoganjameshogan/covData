@@ -51,7 +51,31 @@ print('______________________________________________________________\n')
 def colorFn(x):
     color = 'white'
     name = x['properties']['NAME']
-    
+
+    #temp fix for mismatching country names
+    if name == "Iran (Islamic Republic of)":
+            name = "Iran"
+    if name == "Lao People's Democratic Republic":
+            name = "Laos"
+    if name == "The former Yugoslav Republic of Macedonia":
+            name = "North Macedonia"
+    if name == "Viet Nam":
+            name = "Vietnam"        
+    if name == "Swaziland":
+            name = "Eswatini" 
+    if name == "Korea, Republic of":
+            name = "South Korea"
+    if name == "Republic of Moldova":
+            name = "Moldova"
+    if name == "Syrian Arab Republic":
+            name = "Syria" 
+    if name == "Democratic Republic of the Congo":
+            name = "Democratic Republic of Congo"      
+    if name == "Libyan Arab Jamahiriya":
+            name = "Libya" 
+    if name == "Czech Republic":
+            name = "Czechia"        
+
     if name not in tidyDict:
         
         print('%s nope' % (name))
@@ -65,7 +89,7 @@ def colorFn(x):
         elif tidyDict[name] >= 100 and tidyDict[name] < 500:
             color = 'yellow'
         elif tidyDict[name] >= 10 and tidyDict[name] < 100:
-            color = '#a0beef'
+            color = '#67d7db'
         else :
             color = 'green'    
     return color
@@ -78,6 +102,8 @@ fg.add_child(folium.GeoJson(data=open("world.json", "r",encoding="utf-8-sig").re
 style_function= lambda x : {'fillColor':colorFn(x), 'stroke':'black'}))
 
 worldMap.add_child(fg)
+worldMap.add_child(folium.LayerControl())
+
 worldMap.save("cov_map.html")
 
 webbrowser.open("cov_map.html")
