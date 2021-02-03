@@ -7,7 +7,6 @@ import webbrowser
 import pandas as pd
 from datetime import datetime, timedelta
 import json
-import pandas
 
 load = open("world.json", "r",encoding="utf-8-sig").read()
 
@@ -19,18 +18,22 @@ worldMap.save("test.html")
 
 data = pd.read_json(r"cov_02-02-21.json")
 
-dt = (datetime.today().now() - timedelta(days=1))
-dtf = dt.strftime("%Y-%m-%d")
+#update to adjust to proper date
+yesterday = (datetime.today().now() - timedelta(days=1))
+dtf = yesterday.strftime("%Y-%m-%d")
 
 tidyArr = []
 for item in data:
     for res in data[item]['data']:
         if res['date'] == dtf:
-            pair = [data[item]['location'],int(res['new_cases'])]
-            outStr = "%s : %s" % (pair[0],pair[1])
-            tidyArr.append(pair)
+            if 'new_cases' in res:
+                pair = [data[item]['location'],int(res['new_cases'])]
+                outStr = "%s : %s" % (pair[0],pair[1])
+                tidyArr.append(pair)
+            else : 
+                continue
             # print(tidyArr)
-            # print(tidyArr[0])
+            print(tidyArr)
 
 load = [open("world.json", "r",encoding="utf-8-sig").read(), tidyArr]
 
