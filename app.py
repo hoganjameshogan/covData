@@ -16,7 +16,7 @@ fg.add_child(folium.GeoJson(data=load))
 worldMap.add_child(fg)
 worldMap.save("test.html")
 
-data = pd.read_json(r"cov_02-02-21.json")
+data = pd.read_json(r"data/cov_03-02-21.json")
 
 #update to adjust to proper date
 yesterday = (datetime.today().now() - timedelta(days=1))
